@@ -1,4 +1,4 @@
- trabalhos segurança
+ Trabalhos segurança
 
 
 T1 - Implementação Diffie-Hellman
@@ -6,10 +6,10 @@ T1 - Implementação Diffie-Hellman
    Após inicializar, é necessário copiar a chave compartilhada para o outro "cliente". Assim, ambas as chaves calculadas deverão ser iguais.
    
    
-   ex: python3 dh.py 80
+   ex: python3 dh.py 80:
        	       --chave pública : 12698830608 
-       python3 dh.py 15
+       python3 dh.py 15:
        	       --chave pública: 107430705947
 
 
-       Trocando as chaves entre os dois, temos como resultado: 56838093148
+       Trocando as chaves entre os dois, temos como resultado: 56838093148.
