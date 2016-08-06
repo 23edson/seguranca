@@ -13,3 +13,8 @@ T1 - Implementação Diffie-Hellman
 
 
        Trocando as chaves entre os dois, temos como resultado: 56838093148.
+       
+ T2 - Implementação AES256
+ 	Para testar basta executar o arquivo aes256.py
+ 	Como resultado, o algoritmo exibe a mensagem original, criptografada e decriptografa.
+ 	A chave é adaptada para um hash SHA256, e posteriormente executado na função de AES.
