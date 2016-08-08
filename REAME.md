@@ -16,5 +16,9 @@ T1 - Implementação Diffie-Hellman
        
  T2 - Implementação AES256
  	Para testar basta executar o arquivo aes256.py
- 	Como resultado, o algoritmo exibe a mensagem original, criptografada e decriptografa.
+ 	Como resultado, o algoritmo exibe a mensagem original, criptografada e decriptografada.
  	A chave é adaptada para um hash SHA256, e posteriormente executado na função de AES.
+ 	
+ T3 - Implementação RSA
+ 	Para testar, basta executar o arquivo rsa.py
+ 	Como resultado, o algoritmo exibe a mensagem criptografada e decriptografada.
