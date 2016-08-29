@@ -56,13 +56,10 @@ def genAlphabet():
 	s = sorted(tam,key=lambda k: random.random())
 	return dict(zip(tam,s))
 
-	
-
 def encrySubs(data):
 	
 	keys = genAlphabet()
 	sub = np.array([],dtype=int)
-	print(data)
 	for l in data:
 		sub = np.insert(sub,len(sub),keys[l],axis=0)
 	return sub,keys
@@ -70,14 +67,11 @@ def encrySubs(data):
 def decrySubs(data,key):
 	#keys = {v: k for k, v in key.items()}
 	#keys = genAlphabet()
-	keys = key
-	print(data)
-	for k,j in key.items():
-		keys.update({j: k})
-	print(keys)
 	sub = np.array([],dtype=int)
-	for l in data:
-		sub = np.insert(sub,len(sub),keys[l],axis=0)
+	for i in data:
+		for k,j in key.items():
+			if i==j:
+				sub = np.insert(sub,len(sub),k,axis=0)
 	return sub
 		
 
@@ -109,7 +103,9 @@ data = np.array([t for t in b ])
 #list1=[chr(i) for i in decr]
 #print(''. join(list1))
 encryptedSub,keySub = encrySubs(data)
-print(keySub)
+#print(keySub)
+list1=[chr(i) for i in encryptedSub]
+print(''. join(list1))
 dec = decrySubs(encryptedSub,keySub)
 list1=[chr(i) for i in dec]
 print(''. join(list1))
