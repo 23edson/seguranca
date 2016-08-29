@@ -4,7 +4,7 @@
 
 import numpy as np
 import sys
-
+import random
 MODULO = 256
 k = 3
 k2 = 4
@@ -47,14 +47,45 @@ def decryVigenere(data,keys):
 			flag = 0
 	return dec
 	
-#Cifra Transposição
+#Cifra Substituição
 
+def genAlphabet():
+	tam = [i for i in range(MODULO)]
+	#np.random.seed(3)
+	
+	s = sorted(tam,key=lambda k: random.random())
+	return dict(zip(tam,s))
+
+	
+
+def encrySubs(data):
+	
+	keys = genAlphabet()
+	sub = np.array([],dtype=int)
+	print(data)
+	for l in data:
+		sub = np.insert(sub,len(sub),keys[l],axis=0)
+	return sub,keys
+	
+def decrySubs(data,key):
+	#keys = {v: k for k, v in key.items()}
+	#keys = genAlphabet()
+	keys = key
+	print(data)
+	for k,j in key.items():
+		keys.update({j: k})
+	print(keys)
+	sub = np.array([],dtype=int)
+	for l in data:
+		sub = np.insert(sub,len(sub),keys[l],axis=0)
+	return sub
+		
 
 try:
 	arq = open("data.in","rb")
 except IOError:
-		print("Problema ao abrir o arquivo")
-		exit(0)
+	print("Problema ao abrir o arquivo")
+	exit(0)
 
 	
 	
@@ -73,9 +104,14 @@ data = np.array([t for t in b ])
 #print(data)
 #print("tam"+ str(len(data)))
 
-encryptedVigenere = encryVigenere(data,[k,k2])
-decr= decryVigenere(encryptedVigenere,[k,k2])
-list1=[chr(i) for i in decr]
+#encryptedVigenere = encryVigenere(data,[k,k2])
+#decr= decryVigenere(encryptedVigenere,[k,k2])
+#list1=[chr(i) for i in decr]
+#print(''. join(list1))
+encryptedSub,keySub = encrySubs(data)
+print(keySub)
+dec = decrySubs(encryptedSub,keySub)
+list1=[chr(i) for i in dec]
 print(''. join(list1))
 #print(encryptedVigenere)
 
