@@ -74,6 +74,20 @@ def decrySubs(data,key):
 				sub = np.insert(sub,len(sub),k,axis=0)
 	return sub
 		
+#https://inventwithpython.com/hacking/chapter8.html
+#https://inventwithpython.com/hacking/chapter9.html
+#Cifra Transposição
+def encryTransposition(data,k):
+	string = []
+	m = np.array([],dtype=int)
+	for i in range(k):
+		p = i
+		while p < len(mem):
+			
+			
+		
+	
+
 
 try:
 	arq = open("data.in","rb")
