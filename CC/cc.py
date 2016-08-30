@@ -5,9 +5,10 @@
 import numpy as np
 import sys
 import random
+import math
 MODULO = 256
-k = 3
-k2 = 4
+
+
 
 #Cifra Ceasar
 def encryCeasar(data,k):
@@ -74,18 +75,47 @@ def decrySubs(data,key):
 				sub = np.insert(sub,len(sub),k,axis=0)
 	return sub
 		
-#https://inventwithpython.com/hacking/chapter8.html
+#Reference:..
 #https://inventwithpython.com/hacking/chapter9.html
 #Cifra Transposição
-def encryTransposition(data,k):
-	string = []
-	m = np.array([],dtype=int)
+
+def copyArray(data,k):
+	flag = 0
 	for i in range(k):
+		if flag==0:
+			out = np.asarray(data[i])
+			flag = 1
+		else:
+			out = np.insert(out,len(out),data[i],axis=0)
+	return out
+	
+def encryTransposition(data,k):
+	m = []
+	#out = np.array([],dtype=int)
+	for i in range(k):
+		m.append([])
 		p = i
-		while p < len(mem):
-			
+		while p < len(data):
+			m[i].append(data[p])
+			p = p + k
+	return(copyArray(m,k))
 			
 		
+def decryTransposition(data,k):
+	flag = 0
+	flag1 = 0
+	m = []
+	cols = math.ceil(len(data) / k)
+	junk = (cols*k) - len(data)
+	for i in range(cols):
+		m.append([])
+	for i in data:
+		m[flag].append(i)
+		flag = flag+1
+		if (flag == cols) or  (flag == cols-1 and flag1 >= k - junk):
+			flag = 0 
+			flag1= flag1+1
+	return(copyArray(m,cols))		
 	
 
 
@@ -97,34 +127,7 @@ except IOError:
 
 	
 	
-
-	
-
 b = arq.read()
 data = np.array([t for t in b ])
-
-#encryptedCeasar = encryCeasar(data,k)
-#list1=[chr(i) for i in encryptedCeasar]
-#decryptedCeasar = decryCeasar(encryptedCeasar,k)
-#print(''.join(list1))
-
-#print(decryptedCeasar)	
-#print(data)
-#print("tam"+ str(len(data)))
-
-#encryptedVigenere = encryVigenere(data,[k,k2])
-#decr= decryVigenere(encryptedVigenere,[k,k2])
-#list1=[chr(i) for i in decr]
-#print(''. join(list1))
-encryptedSub,keySub = encrySubs(data)
-#print(keySub)
-list1=[chr(i) for i in encryptedSub]
-print(''. join(list1))
-dec = decrySubs(encryptedSub,keySub)
-list1=[chr(i) for i in dec]
-print(''. join(list1))
-#print(encryptedVigenere)
-
-
 arq.close()	
 	
