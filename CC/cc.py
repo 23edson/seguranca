@@ -118,16 +118,3 @@ def decryTransposition(data,k):
 	return(copyArray(m,cols))		
 	
 
-
-try:
-	arq = open("data.in","rb")
-except IOError:
-	print("Problema ao abrir o arquivo")
-	exit(0)
-
-	
-	
-b = arq.read()
-data = np.array([t for t in b ])
-arq.close()	
-	
