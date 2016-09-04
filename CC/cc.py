@@ -25,10 +25,13 @@ def encryVigenere(data,keys):
 	tam  = len(keys)
 	#print("tam1"+str(len(data)))
 	
-	vigenere = np.array([],dtype=int)
-	
+	#vigenere = np.array([],dtype=int)
+	vigenere = []
+	j = 0
 	for i in data:
-		vigenere = np.insert(vigenere, len(vigenere),(i+MODULO+keys[flag])%MODULO,axis=0)
+		#print(j)
+		#j=j+1
+		vigenere.append((i+MODULO+keys[flag])%MODULO)
 		flag = flag + 1
 		if flag >= tam:
 			flag =0
@@ -40,9 +43,9 @@ def decryVigenere(data,keys):
 	flag = 0
 	
 	tam  = len(keys)
-	dec = np.array([],dtype=int)
+	dec = []
 	for i in data:
-		dec = np.insert(dec, len(dec),(i+MODULO-keys[flag])%MODULO,axis=0)
+		dec.append((i+MODULO-keys[flag])%MODULO)
 		flag = flag  +1
 		if flag >= tam:
 			flag = 0
@@ -50,71 +53,58 @@ def decryVigenere(data,keys):
 	
 #Cifra Substituição
 
-def genAlphabet():
-	tam = [i for i in range(MODULO)]
+#def genAlphabet():
+	#tam = [i for i in range(MODULO)]
 	#np.random.seed(3)
 	
-	s = sorted(tam,key=lambda k: random.random())
-	return dict(zip(tam,s))
+	#s = sorted(tam,key=lambda k: random.random())
+	#return dict(zip(tam,s))
 
-def encrySubs(data):
+def encrySubs(data,key):
+	tam = [i for i in range(MODULO)]
+	#keys = genAlphabet()
+	#sub = np.array([],dtype=int)
+	sub = []
+	for i in data:
+		sub.append(key[tam.index(i)])
 	
-	keys = genAlphabet()
-	sub = np.array([],dtype=int)
-	for l in data:
-		sub = np.insert(sub,len(sub),keys[l],axis=0)
-	return sub,keys
+	return np.array(sub)
 	
 def decrySubs(data,key):
+	tam = [i for i in range(MODULO)]
 	#keys = {v: k for k, v in key.items()}
 	#keys = genAlphabet()
-	sub = np.array([],dtype=int)
+	#sub = np.array([],dtype=int)
+	sub = []
 	for i in data:
-		for k,j in key.items():
-			if i==j:
-				sub = np.insert(sub,len(sub),k,axis=0)
-	return sub
+		sub.append(tam[key.index(i)])
+	return np.array(sub)
 		
 #Reference:..
 #https://inventwithpython.com/hacking/chapter9.html
 #Cifra Transposição
 
-def copyArray(data,k):
-	flag = 0
-	for i in range(k):
-		if flag==0:
-			out = np.asarray(data[i])
-			flag = 1
-		else:
-			out = np.insert(out,len(out),data[i],axis=0)
-	return out
-	
+
 def encryTransposition(data,k):
 	m = []
-	#out = np.array([],dtype=int)
-	for i in range(k):
+	p= 0
+	tam = int(len(data))
+	for i in range(0,tam,k):
+		zero = [0]*k
+		t = data[i:i+k]
+		zero[0:t.size] = t
 		m.append([])
-		p = i
-		while p < len(data):
-			m[i].append(data[p])
-			p = p + k
-	return(copyArray(m,k))
+		m[p].append(zero)
+		p+=1
+	 	
+	return(np.asarray(np.array(m).T).reshape(-1))
 			
 		
 def decryTransposition(data,k):
-	flag = 0
-	flag1 = 0
 	m = []
-	cols = math.ceil(len(data) / k)
-	junk = (cols*k) - len(data)
-	for i in range(cols):
-		m.append([])
-	for i in data:
-		m[flag].append(i)
-		flag = flag+1
-		if (flag == cols) or  (flag == cols-1 and flag1 >= k - junk):
-			flag = 0 
-			flag1= flag1+1
-	return(copyArray(m,cols))		
+	p= 0
+	k = int(len(data) / k)
+	#k = int(len(data)/k)
+	return encryTransposition(data,k)	
 	
 
