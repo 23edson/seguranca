@@ -23,7 +23,8 @@ T1 - Implementação Diffie-Hellman
  	Para testar, basta executar o arquivo rsa.py
  	Como resultado, o algoritmo exibe a mensagem criptografada e decriptografada.
  	
- T4 - Certificado digital ( não finalizado)
+ T4 - Certificado digital
+      	O arquivo cd.py gera uma string como 'arquivo' concatenado com o hash e a chave pública, cd.py também verifica se há um certificado válido. No início da string, os primeiros 32bytes representam o tamanho do texto, hash e chave pública respectivamente.
  
  T5 - Buffer Overflow
         Execute o arquivo "udpserver",
