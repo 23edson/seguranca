@@ -70,7 +70,12 @@ for inp in inputs:
 					total['v']+=1
 					if k=='X' or k=='Y':
 						#implementar como descobrir uma chave
-						continue
+						diff = data2 - data
+						for i in range(1,30):
+							enc = encryVigenere(data,diff[0:i])
+							if (data2==enc).mean() == 1:
+								find['v']+=1
+								break
 					else:
 						keys  = np.array(list(k.encode()), dtype=int)
 						cifr = encryVigenere(data,keys)
@@ -112,4 +117,4 @@ print("\nAcertos Ceasar:" +str(find['c'])+"/"+str(total['c']))
 print("Acertos Vigenere:" +str(find['v'])+"/"+str(total['v']))
 print("Acertos Transposicao:" +str(find['t'])+"/"+str(total['t']))
 print("Acertos Substituicao:" +str(find['s'])+"/"+str(total['s']))
-print("Porcentagem de acerto:" + str(100*sum(find.values())/ sum(total.values())))
+print("Porcentagem de acertos:" + str(round(100*sum(find.values())/ sum(total.values()),2)))
