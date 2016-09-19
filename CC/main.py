@@ -4,7 +4,6 @@
 #Testes para as cifras
 
 from os import listdir
-import numpy as np
 from cc import *
 
 inputs = listdir('testcases/inputs/')
@@ -100,14 +99,24 @@ for inp in inputs:
 					total['s']+=1
 					if k == 'X' or k == 'Y':
 						#implementar como descobrir uma chave
-						continue
+						tam = [i for i in range(MODULO)]
+						key = [0]*MODULO
+						for i,j in enumerate(data):
+							key[tam.index(j)] = data2[i]
+							
+						cifr = encrySubs(data,key)
+						if np.array(cifr==data2).mean()==1:
+							find['s']+=1
+						
 					else:
 						q = open('testcases/' + k,"rb")
-						q = q.read()
-						q = np.array([t for t in q])
+						b = q.read()
+						q.close()
+						q = np.array([t for t in b])
 						cifr = encrySubs(data,q)
 						if np.array(cifr==data2).mean()==1:
 							find['s']+=1
+						
 			#print("s")
 			arq2.close()
 	arq.close()	
@@ -117,4 +126,4 @@ print("\nAcertos Ceasar:" +str(find['c'])+"/"+str(total['c']))
 print("Acertos Vigenere:" +str(find['v'])+"/"+str(total['v']))
 print("Acertos Transposicao:" +str(find['t'])+"/"+str(total['t']))
 print("Acertos Substituicao:" +str(find['s'])+"/"+str(total['s']))
-print("Porcentagem de acertos:" + str(round(100*sum(find.values())/ sum(total.values()),2)))
+print("Porcentagem de acertos:" + str(round(100*sum(find.values())/ sum(total.values()),2)) + "%")
