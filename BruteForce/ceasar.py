@@ -49,7 +49,8 @@ def VigenereBreaker(data,dictionary):
 	for tam in range(1,10):
 		permut = itertools.product(word, repeat=tam)
 		for i in permut:
-			k = np.array([t for t in i])
+			count = 0
+			k = np.array([ord(t) for t in i])
 			k = list(k)
 			wrd = decryVigenere(data,k)
 			wrd = bytes([t for t in wrd])
