@@ -62,10 +62,3 @@ hashf1 = hashf1.digest()
 getKey = RSA.importKey(ReadpubKey)
 encrypted1 = getKey.encrypt(hashf1.decode(encoding = 'latin').encode(),32)
 print("Arquivo íntegro") if encrypted1[0]==ReadHash.encode('latin') else print("Arquivo com problema")
-
-
-
-
-
-
-
