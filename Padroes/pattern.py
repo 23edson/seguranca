@@ -26,3 +26,4 @@ def patterns(words):
 
 	return pp
 pp = patterns(w)
+print(pp)
