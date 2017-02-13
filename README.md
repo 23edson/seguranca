@@ -45,7 +45,23 @@ T6 - Criptografia clássica
 	Substituição:
 		encrySubs(data,k): Recebe o array de bytes e a chave, e devolve um array com cifra de substituição 
 		decrySubs(data,key): Recebe o array de bytes e uma chave para esta cifra, e devolve o vetor de bytes decriptografado.
-	
+	As implementações estão no arquivo 'cc.py' dentro da pasta CC.
+
+ T7 - Quebrar cifras em posse do texto original
+ 	O arquivo de execução dos teste encontra-se em 'main.py' dentro da pastas CC
+ 	
+ T8 - Quebrar cifras com força-bruta
+ 	A implementação encontra-se no arquivo 'breaker.py' dentro da pasta BruteForce.
+ 	O arquivo teste é o 'main.py' dentro da mesma pasta.
+ 	
+ T9 - Entropia
+ 	Dentro da pasta Entropia, basta executar o arquivo 'entropy.py'.
+ 	O teste em questão é feito apenas sobre o arquivo '7.inputs.sub.X'.
+ 
+ T10 - Padrões
+ 	Dentro da pasta Padroes, basta executar o arquivo 'pattern.py'.
+ 	
+ 	
  
  
  
